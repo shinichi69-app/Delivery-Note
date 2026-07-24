@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
@@ -106,7 +106,7 @@
                 <i class="fa-solid fa-plus"></i> เพิ่มรายการ
             </button>
             <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium text-sm transition flex items-center gap-1.5 shadow-sm">
-                <i class="fa-solid fa-print"></i> พิมพ์ / บันทึกลงPC (PDF)
+                <i class="fa-solid fa-print"></i> พิมพ์ / บันทึก PDF
             </button>
         </div>
     </div>
@@ -279,7 +279,7 @@
             renderItems();
         });
 
-        // Render table items
+        // Render full table items (Used only on init, add row, or delete row)
         function renderItems() {
             const container = document.getElementById('itemsContainer');
             container.innerHTML = '';
@@ -287,8 +287,9 @@
             items.forEach((item, index) => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50';
+                tr.id = `row-${item.id}`;
                 tr.innerHTML = `
-                    <td class="py-2 px-3 text-center text-slate-500 font-medium">${index + 1}</td>
+                    <td class="py-2 px-3 text-center text-slate-500 font-medium row-index">${index + 1}</td>
                     <td class="py-2 px-3">
                         <input type="text" value="${item.name}" oninput="updateItem(${item.id}, 'name', this.value)" 
                                class="w-full border border-transparent rounded px-1 py-0.5" placeholder="ระบุรายการ">
@@ -301,7 +302,7 @@
                         <input type="number" min="0" step="0.01" value="${item.price}" oninput="updateItem(${item.id}, 'price', this.value)" 
                                class="w-full text-right border border-transparent rounded px-1 py-0.5" placeholder="0.00">
                     </td>
-                    <td class="py-2 px-3 text-right font-medium text-slate-800">
+                    <td class="py-2 px-3 text-right font-medium text-slate-800 item-total">
                         ${(item.qty * item.price).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </td>
                     <td class="py-2 px-2 text-center no-print">
@@ -333,15 +334,24 @@
             renderItems();
         }
 
-        // Update item data
+        // Update item data without re-rendering whole table (Fixes focus loss)
         function updateItem(id, field, value) {
             const item = items.find(i => i.id === id);
             if (item) {
                 if (field === 'qty') item.qty = parseFloat(value) || 0;
                 else if (field === 'price') item.price = parseFloat(value) || 0;
                 else if (field === 'name') item.name = value;
+
+                // Update row subtotal DOM specifically without destroying inputs
+                const row = document.getElementById(`row-${id}`);
+                if (row) {
+                    const totalCell = row.querySelector('.item-total');
+                    if (totalCell) {
+                        totalCell.innerText = (item.qty * item.price).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    }
+                }
                 
-                renderItems();
+                calculate();
             }
         }
 
