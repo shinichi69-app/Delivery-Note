@@ -20,7 +20,7 @@
             color: #1f2937;
         }
 
-        /* A4 Page Layout */
+        /* A4 Page Styling */
         .a4-page {
             width: 210mm;
             min-height: 297mm;
@@ -32,21 +32,21 @@
             box-sizing: border-box;
         }
 
-        /* Form Inputs Styling for Screen */
+        /* Input & Textarea Interactive Styling */
         input, textarea, select {
-            transition: all 0.2s ease-in-out;
+            transition: all 0.15s ease-in-out;
         }
         input:hover, textarea:hover, select:hover {
-            background-color: #f9fafb;
+            background-color: #f8fafc;
         }
         input:focus, textarea:focus, select:focus {
             outline: none;
             background-color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
         }
 
-        /* Print Media Styles */
+        /* Print Specific CSS Optimization */
         @media print {
             @page {
                 size: A4 portrait;
@@ -71,6 +71,7 @@
                 box-shadow: none !important;
                 border: none !important;
             }
+            /* Clean input appearance for print */
             input, textarea, select {
                 border: none !important;
                 background: transparent !important;
@@ -81,7 +82,6 @@
                 appearance: none !important;
                 -webkit-appearance: none !important;
             }
-            /* Hide number spinners in print */
             input[type=number]::-webkit-inner-spin-button,
             input[type=number]::-webkit-outer-spin-button {
                 -webkit-appearance: none;
@@ -95,11 +95,11 @@
 </head>
 <body class="py-6">
 
-    <!-- Top Action Bar (Toolbar) -->
+    <!-- Top Action Toolbar (Hidden during Print) -->
     <div class="no-print max-w-[210mm] mx-auto mb-4 p-4 bg-white rounded-xl shadow-md flex flex-wrap justify-between items-center gap-3 border border-gray-200">
         <div class="flex items-center gap-2 text-slate-700">
             <i class="fa-solid fa-file-invoice text-blue-600 text-xl"></i>
-            <span class="font-semibold text-lg">ระบบสร้างใบส่งมอบงาน / ใบวางบิล</span>
+            <span class="font-bold text-lg">ระบบสร้างใบส่งมอบงาน / ใบวางบิล</span>
         </div>
         <div class="flex items-center gap-2">
             <button onclick="addRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition flex items-center gap-1.5 shadow-sm">
@@ -111,15 +111,15 @@
         </div>
     </div>
 
-    <!-- A4 Document Box -->
+    <!-- A4 Document Workspace -->
     <div class="a4-page flex flex-col justify-between text-slate-800 text-sm">
         <div>
             <!-- Header Section -->
             <div class="flex justify-between items-start border-b-2 border-slate-800 pb-6 mb-6">
-                <!-- Company Info -->
+                <!-- Supplier Info -->
                 <div class="w-2/3 pr-4">
                     <input type="text" value="บริษัท ของคุณ จำกัด (สำนักงานใหญ่)" class="w-full font-bold text-xl text-slate-900 border border-transparent rounded px-1 py-0.5 focus:border-slate-300 mb-1" placeholder="ชื่อบริษัทของคุณ">
-                    <textarea rows="2" class="w-full text-slate-600 text-xs border border-transparent rounded px-1 py-0.5 resize-none" placeholder="ที่อยู่บริษัท, เลขประจำตัวผู้เสียภาษี, เบอร์โทรศัพท์">123/45 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110&#10;เลขประจำตัวผู้เสียภาษี: 0105550000000 | โทร: 02-123-4567</textarea>
+                    <textarea rows="2" class="w-full text-slate-600 text-xs border border-transparent rounded px-1 py-0.5 resize-none leading-relaxed" placeholder="ที่อยู่บริษัท, เลขประจำตัวผู้เสียภาษี, เบอร์โทรศัพท์">123/45 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110&#10;เลขประจำตัวผู้เสียภาษี: 0105550000000 | โทร: 02-123-4567</textarea>
                 </div>
                 <!-- Document Title -->
                 <div class="w-1/3 text-right">
@@ -128,16 +128,16 @@
                 </div>
             </div>
 
-            <!-- Customer & Document Meta Info -->
+            <!-- Customer Details & Document Metadata -->
             <div class="grid grid-cols-2 gap-6 mb-6">
                 <!-- Customer Details -->
                 <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 print:bg-transparent print:p-0 print:border-none">
                     <p class="text-xs font-bold text-slate-500 uppercase mb-1">ข้อมูลลูกค้า / BILLED TO:</p>
                     <input type="text" value="บริษัท ผู้รับบริการ จำกัด" class="w-full font-bold text-slate-800 border border-transparent rounded px-1 py-0.5 mb-1" placeholder="ชื่อบริษัทลูกค้า">
-                    <textarea rows="3" class="w-full text-xs text-slate-600 border border-transparent rounded px-1 py-0.5 resize-none" placeholder="ที่อยู่ลูกค้า, เลขผู้เสียภาษี">99/9 อาคารทาวเวอร์ ชั้น 15 ถนนพหลโยธิน เขตจตุจักร กรุงเทพฯ 10900&#10;เลขประจำตัวผู้เสียภาษี: 0105560000000&#10;ผู้ติดต่อ: คุณสมชาย (081-999-8888)</textarea>
+                    <textarea rows="3" class="w-full text-xs text-slate-600 border border-transparent rounded px-1 py-0.5 resize-none leading-relaxed" placeholder="ที่อยู่ลูกค้า, เลขผู้เสียภาษี">99/9 อาคารทาวเวอร์ ชั้น 15 ถนนพหลโยธิน เขตจตุจักร กรุงเทพฯ 10900&#10;เลขประจำตัวผู้เสียภาษี: 0105560000000&#10;ผู้ติดต่อ: คุณสมชาย (081-999-8888)</textarea>
                 </div>
 
-                <!-- Invoice Meta Details -->
+                <!-- Invoice Metadata -->
                 <div class="space-y-1.5 text-xs">
                     <div class="flex justify-between items-center">
                         <span class="font-semibold text-slate-600">เลขที่เอกสาร / No:</span>
@@ -170,14 +170,14 @@
                         <th class="py-2.5 px-2 text-center w-10 no-print"></th>
                     </tr>
                 </thead>
-                <tbody id="itemsContainer" class="divide-y divide-slate-200 text-xs">
-                    <!-- Dynamic Rows Will Be Rendered Here -->
+                <tbody id="itemsBody" class="divide-y divide-slate-200 text-xs">
+                    <!-- Rows appended dynamically via JS -->
                 </tbody>
             </table>
 
-            <!-- Calculation & Baht Text Section -->
+            <!-- Calculation & Baht Text Summary Section -->
             <div class="grid grid-cols-12 gap-4 mt-6 pt-2">
-                <!-- Left: Payment Info & Baht Text -->
+                <!-- Left Column: Baht Text & Payment Info -->
                 <div class="col-span-7 flex flex-col justify-between">
                     <div>
                         <!-- Thai Baht Text -->
@@ -186,7 +186,7 @@
                             <span id="bahtText" class="font-bold text-slate-800 text-xs">ศูนย์บาทถ้วน</span>
                         </div>
 
-                        <!-- Payment Details -->
+                        <!-- Payment Information -->
                         <div class="text-xs text-slate-600 space-y-1">
                             <p class="font-semibold text-slate-800">ข้อมูลการชำระเงิน (Payment Info):</p>
                             <p>ธนาคาร: กสิกรไทย (KBANK) | บัญชีออมทรัพย์</p>
@@ -196,29 +196,29 @@
                     </div>
                 </div>
 
-                <!-- Right: Calculations Summary -->
+                <!-- Right Column: Calculation Totals -->
                 <div class="col-span-5 text-xs space-y-2">
                     <div class="flex justify-between items-center">
                         <span class="text-slate-600">รวมเป็นเงิน (Subtotal):</span>
                         <span id="subtotal" class="font-semibold text-slate-800">0.00</span>
                     </div>
 
-                    <!-- VAT Option -->
+                    <!-- VAT Toggle -->
                     <div class="flex justify-between items-center">
                         <label class="flex items-center gap-1.5 cursor-pointer no-print">
-                            <input type="checkbox" id="vatToggle" onchange="calculate()" checked class="rounded text-blue-600">
+                            <input type="checkbox" id="vatToggle" onchange="calculateSummary()" checked class="rounded text-blue-600">
                             <span class="text-slate-600">ภาษีมูลค่าเพิ่ม VAT 7%</span>
                         </label>
                         <span class="text-slate-600 print:inline hidden">ภาษีมูลค่าเพิ่ม VAT 7%</span>
                         <span id="vatAmount" class="font-semibold text-slate-800">0.00</span>
                     </div>
 
-                    <!-- Withholding Tax Option -->
+                    <!-- Withholding Tax Toggle -->
                     <div class="flex justify-between items-center">
                         <div class="flex items-center gap-1 no-print">
-                            <input type="checkbox" id="whtToggle" onchange="calculate()" class="rounded text-blue-600">
+                            <input type="checkbox" id="whtToggle" onchange="calculateSummary()" class="rounded text-blue-600">
                             <span class="text-slate-600">หัก ณ ที่จ่าย</span>
-                            <select id="whtRate" onchange="calculate()" class="text-xs border rounded px-1 py-0.5 bg-white">
+                            <select id="whtRate" onchange="calculateSummary()" class="text-xs border rounded px-1 py-0.5 bg-white">
                                 <option value="1">1%</option>
                                 <option value="3" selected>3%</option>
                                 <option value="5">5%</option>
@@ -261,104 +261,117 @@
         </div>
     </div>
 
-    <!-- JavaScript logic -->
+    <!-- JavaScript Core Logic -->
     <script>
-        // Sample initial items
-        let items = [
-            { id: 1, name: 'พัฒนาและดีไซน์เว็บไซต์ (Web Development)', qty: 1, price: 25000 },
-            { id: 2, name: 'บริการปรับแต่ง SEO & Performance Optimization', qty: 1, price: 5000 }
+        // Initial Sample Data
+        const initialItems = [
+            { name: 'พัฒนาและดีไซน์เว็บไซต์ (Web Development)', qty: 1, price: 25000 },
+            { name: 'บริการปรับแต่ง SEO & Performance Optimization', qty: 1, price: 5000 }
         ];
 
-        // Set default dates
         document.addEventListener('DOMContentLoaded', () => {
+            // Set Default Dates
             const today = new Date().toISOString().split('T')[0];
             const next30Days = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
             document.getElementById('docDate').value = today;
             document.getElementById('dueDate').value = next30Days;
-            
-            renderItems();
+
+            // Load Initial Items
+            initialItems.forEach(item => createRowNode(item.name, item.qty, item.price));
+            calculateSummary();
+
+            // Event Delegation for Table Input Changes (NO RE-RENDER TO PRESERVE FOCUS)
+            document.getElementById('itemsBody').addEventListener('input', (e) => {
+                if (e.target.classList.contains('input-qty') || e.target.classList.contains('input-price')) {
+                    const row = e.target.closest('tr');
+                    calculateRow(row);
+                    calculateSummary();
+                }
+            });
         });
 
-        // Render full table items (Used only on init, add row, or delete row)
-        function renderItems() {
-            const container = document.getElementById('itemsContainer');
-            container.innerHTML = '';
-
-            items.forEach((item, index) => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50';
-                tr.id = `row-${item.id}`;
-                tr.innerHTML = `
-                    <td class="py-2 px-3 text-center text-slate-500 font-medium row-index">${index + 1}</td>
-                    <td class="py-2 px-3">
-                        <input type="text" value="${item.name}" oninput="updateItem(${item.id}, 'name', this.value)" 
-                               class="w-full border border-transparent rounded px-1 py-0.5" placeholder="ระบุรายการ">
-                    </td>
-                    <td class="py-2 px-3 text-center">
-                        <input type="number" min="1" value="${item.qty}" oninput="updateItem(${item.id}, 'qty', this.value)" 
-                               class="w-full text-center border border-transparent rounded px-1 py-0.5" placeholder="1">
-                    </td>
-                    <td class="py-2 px-3 text-right">
-                        <input type="number" min="0" step="0.01" value="${item.price}" oninput="updateItem(${item.id}, 'price', this.value)" 
-                               class="w-full text-right border border-transparent rounded px-1 py-0.5" placeholder="0.00">
-                    </td>
-                    <td class="py-2 px-3 text-right font-medium text-slate-800 item-total">
-                        ${(item.qty * item.price).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </td>
-                    <td class="py-2 px-2 text-center no-print">
-                        <button onclick="deleteRow(${item.id})" class="text-slate-400 hover:text-red-500 transition px-1">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                `;
-                container.appendChild(tr);
-            });
-
-            calculate();
+        // Helper to format currency
+        function formatMoney(num) {
+            return num.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        // Add new item row
+        // Create a Row Node using direct DOM appending (Prevents typing focus loss)
+        function createRowNode(name = '', qty = 1, price = 0) {
+            const tbody = document.getElementById('itemsBody');
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-50 item-row';
+            
+            tr.innerHTML = `
+                <td class="py-2 px-3 text-center text-slate-500 font-medium row-idx"></td>
+                <td class="py-2 px-3">
+                    <input type="text" value="${name}" class="input-name w-full border border-transparent rounded px-1 py-0.5" placeholder="ระบุรายการสินค้า/บริการ">
+                </td>
+                <td class="py-2 px-3 text-center">
+                    <input type="number" min="1" value="${qty}" class="input-qty w-full text-center border border-transparent rounded px-1 py-0.5" placeholder="1">
+                </td>
+                <td class="py-2 px-3 text-right">
+                    <input type="number" min="0" step="0.01" value="${price}" class="input-price w-full text-right border border-transparent rounded px-1 py-0.5" placeholder="0.00">
+                </td>
+                <td class="py-2 px-3 text-right font-medium text-slate-800 row-total">
+                    ${formatMoney(qty * price)}
+                </td>
+                <td class="py-2 px-2 text-center no-print">
+                    <button type="button" onclick="deleteRow(this)" class="text-slate-400 hover:text-red-500 transition px-1">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
+            `;
+
+            tbody.appendChild(tr);
+            calculateRow(tr);
+            updateRowIndices();
+        }
+
+        // Add Row Button Handler
         function addRow() {
-            const newId = items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1;
-            items.push({ id: newId, name: '', qty: 1, price: 0 });
-            renderItems();
+            createRowNode('', 1, 0);
+            calculateSummary();
         }
 
-        // Delete row
-        function deleteRow(id) {
-            if (items.length <= 1) {
+        // Delete Row Handler
+        function deleteRow(btn) {
+            const tbody = document.getElementById('itemsBody');
+            if (tbody.querySelectorAll('tr').length <= 1) {
                 alert('ต้องมีอย่างน้อย 1 รายการค่ะ');
                 return;
             }
-            items = items.filter(item => item.id !== id);
-            renderItems();
+            btn.closest('tr').remove();
+            updateRowIndices();
+            calculateSummary();
         }
 
-        // Update item data without re-rendering whole table (Fixes focus loss)
-        function updateItem(id, field, value) {
-            const item = items.find(i => i.id === id);
-            if (item) {
-                if (field === 'qty') item.qty = parseFloat(value) || 0;
-                else if (field === 'price') item.price = parseFloat(value) || 0;
-                else if (field === 'name') item.name = value;
-
-                // Update row subtotal DOM specifically without destroying inputs
-                const row = document.getElementById(`row-${id}`);
-                if (row) {
-                    const totalCell = row.querySelector('.item-total');
-                    if (totalCell) {
-                        totalCell.innerText = (item.qty * item.price).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    }
-                }
-                
-                calculate();
-            }
+        // Update Row Serial Numbers (1, 2, 3...)
+        function updateRowIndices() {
+            const rows = document.querySelectorAll('#itemsBody tr');
+            rows.forEach((row, index) => {
+                row.querySelector('.row-idx').innerText = index + 1;
+            });
         }
 
-        // Calculate Subtotal, VAT, WHT, Grand Total
-        function calculate() {
-            const subtotal = items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+        // Calculate single row total
+        function calculateRow(row) {
+            const qty = parseFloat(row.querySelector('.input-qty').value) || 0;
+            const price = parseFloat(row.querySelector('.input-price').value) || 0;
+            const total = qty * price;
             
+            row.dataset.total = total;
+            row.querySelector('.row-total').innerText = formatMoney(total);
+        }
+
+        // Global Calculations (Subtotal, VAT, WHT, Grand Total, BahtText)
+        function calculateSummary() {
+            const rows = document.querySelectorAll('#itemsBody tr');
+            let subtotal = 0;
+
+            rows.forEach(row => {
+                subtotal += parseFloat(row.dataset.total) || 0;
+            });
+
             const isVat = document.getElementById('vatToggle').checked;
             const vatAmount = isVat ? subtotal * 0.07 : 0;
 
@@ -369,15 +382,15 @@
             const grandTotal = subtotal + vatAmount - whtAmount;
 
             // DOM Updates
-            document.getElementById('subtotal').innerText = subtotal.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('vatAmount').innerText = vatAmount.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('whtAmount').innerText = `(${whtAmount.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })})`;
-            document.getElementById('grandTotal').innerText = grandTotal.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            
-            // Print View WHT Label Update
+            document.getElementById('subtotal').innerText = formatMoney(subtotal);
+            document.getElementById('vatAmount').innerText = formatMoney(vatAmount);
+            document.getElementById('whtAmount').innerText = `(${formatMoney(whtAmount)})`;
+            document.getElementById('grandTotal').innerText = formatMoney(grandTotal);
+
+            // Print view label sync
             document.getElementById('whtLabelPrint').innerText = `หัก ณ ที่จ่าย ${whtRate}%`;
 
-            // Update Baht Text
+            // Convert Baht Text
             document.getElementById('bahtText').innerText = thaiBahtText(grandTotal);
         }
 
@@ -385,7 +398,7 @@
         function thaiBahtText(num) {
             if (isNaN(num) || num === 0) return 'ศูนย์บาทถ้วน';
             num = Math.round(num * 100) / 100;
-            let [integer, fraction] = num.toString().split('.');
+            let [integer, fraction] = num.toFixed(2).split('.');
             
             const numbers = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
             const digits = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
@@ -417,12 +430,10 @@
             
             result += 'บาท';
             
-            if (!fraction || fraction === '0' || fraction === '00') {
+            if (!fraction || fraction === '00') {
                 result += 'ถ้วน';
             } else {
-                if (fraction.length === 1) fraction += '0';
-                let satangStr = fraction.slice(0, 2);
-                let satangText = convertGroup(satangStr);
+                let satangText = convertGroup(fraction);
                 result += satangText + 'สตางค์';
             }
             return result;
